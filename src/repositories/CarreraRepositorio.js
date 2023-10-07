@@ -18,7 +18,7 @@ module.exports = {
           const result = await pool.query('DELETE FROM carreras WHERE idcarrera = ?', [idCarrera]);
           return result.affectedRows > 0;
         }catch(error){
-          console.error('Error al eliminar el registro', error);
+          console.error('Erro al eliminar el registro', error);
         }
 },
 
@@ -29,7 +29,7 @@ insertarCarrera: async(nuevaCarrera) => {
       return result.insertId;
 
     }catch(error){
-      console.error('Error al eliminar el registro', error);
+      console.error('Erro al eliminar el registro', error);
     }
 },
 
@@ -44,7 +44,7 @@ actualizarCarrera: async (nuevosDatosCarrera) => {
 
     return result.affectedRows > 0;
 } catch (error) {
-console.error('Error al actualizar el registro', error);
+console.error('Erro al actualizar el registro', error);
 throw error;
    }
 }, 
@@ -59,7 +59,7 @@ obtenerCarreraPorId: async (idcarrera) => {
         return null; 
       }
     } catch (error) {
-      console.error('Error al obtener el registro', error);
+      console.error('Erro al obtener el registro', error);
       throw error; 
     }
   },
