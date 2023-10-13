@@ -4,34 +4,34 @@
     </div>
     <div class="row justify-content-center mt-4">
         <div class="col-md-4">
-            <form action="/estudiantes/editar" method="POST">
+            <form action="/estudiantes/editar/{{estudiante.idestudiante}}"  method="POST">
+               
                 <div class="form-group">
-                    <input type="text" class="form-control" name="idestudiante" value="{{estudiante.idestudiante}}"
-                        placeholder="Codigo del estudiante" autofocus />
+                    <input type="text" class="form-control" name="idestudiante" placeholder="Codigo del estudiante" value="{{estudiante.idestudiante}}" autofocus />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="nombre" value="{{estudiante.nombre}}"
-                        placeholder="Nombre del estudiante" autofocus />
+                    <input type="text" class="form-control" name="nombre"placeholder="Nombre del estudiante" value="{{estudiante.nombre}}"  />
+                </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="apellido" placeholder="Apellido del estudiante" value="{{estudiante.apellido}}" />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="apellido" value="{{estudiante.apellido}}"
-                        placeholder="Apellido del estudiante" />
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" value="{{estudiante.email}}"
-                        placeholder="Correo del estudiante" />
+                    <input type="email" class="form-control" name="email" placeholder="Correo del estudiante" value="{{estudiante.email}}" />
                 </div>
                 <div class="form-group">
                     <select class="form-control" name="idcarrera">
                         {{#each lstCarreras}}
-                        {{#ifCond lstCarreras.idcarrera '===' estudiante.idcarrera}}
-                        <option value="{{this.idcarrera}}" selected>{{this.carrera}}</option>
-                        {{else}}
-                        <option value="{{this.idcarrera}}">{{this.carrera}}</option>
-                        {{/ifCond}}
+                        <option value="{{idcarrera}}" {{#eq idcarrera ../estudiante.idcarrera}}selected{{/eq}}>{{carrera}}</option>
                         {{/each}}
                     </select>
                 </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="usuario" placeholder="Usuario del estudiante" value="{{estudiante.usuario}}" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block">Guardar cambios</button>
+                </div>
+            </form>
 
 
 

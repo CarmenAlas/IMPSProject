@@ -4,6 +4,7 @@ const estudianteRepository = require('../repositories/EstudianteRepository');
 
 
 router.get('/', async (request,response) => {
+    
     const lstEstudiantes = await estudianteRepository.obtenerTodosLosEstudiantes();
     console.log('Listado: ', lstEstudiantes);
  
