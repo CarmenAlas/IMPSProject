@@ -16,6 +16,7 @@ app.set('views', path.join(__dirname, 'views')); // Configuracion de la ruta don
 app.engine('.hbs', exphbs.engine({
   defaultLayout: 'main', // Configuracion del layout principal
   layoutsDir: path.join(app.get('views'), 'layouts'), // Configuracion de la ruta de los layouts
+  partialsDir: path.join(app.get('views'), 'partials'), // Configuracion de vistas parciales
   extname: '.hbs', // Configura la extensión que tendran los archivos HandleBars
   helpers: require('./lib/handlebars') // Configuracion de funciones
 }));
@@ -34,6 +35,8 @@ app.use('/materias', require('./routes/materias')); // Configuracion de ruta par
 
 app.use('/profesores', require('./routes/profesores')); // Configuracion de ruta para profesores
 // Archivos publicos (aca se coloca todo el código al cual el navegador puede acceder)
+
+app.use('/grupos', require('./routes/grupos'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 

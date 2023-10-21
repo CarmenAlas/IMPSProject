@@ -1,0 +1,43 @@
+<div class="container p-4">
+   <div class="col-sm-12">
+      <div class="row">
+         <div class="col-sm-6">
+            <h3>Listado grupos</h3>
+         </div>
+         <div class="col-sm-6">
+            <a href="/grupos/agregar" class="btn btn-success d-block text-white">Agregar grupo</a>
+         </div>
+      </div>
+   </div>
+   <div class="col-sm-12 mt-4">
+      <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+            <tr>
+               <th scope="col">ID</th>
+               <th scope="col">N0.Grupo</th>
+               <th scope="col">Año</th>
+               <th scope="col">Ciclo</th>
+               <th scope="col">Materia</th>
+               <th scope="col">Profesor</th>
+               <th scope="col">Opciones</th>
+            </tr>
+         </thead>
+         <tbody>
+            {{#each grupos}}
+            <tr>
+               <th scope="row">{{idgrupo}}</th>
+               <td>{{num_grupo}}</td>
+               <td>{{anio}}</td>
+               <td>{{ciclo}}</td>
+               <td>{{materia}}</td>
+               <td>{{nombre}}</td>
+               <td>
+                  <a class="btn btn-primary text-white"  href="/grupos/editar/{{idgrupo}}">Editar</a>
+                  <a class="btn btn-danger text-white" href="/grupos/eliminar/{{idgrupo}}" >Eliminar</a>
+               </td>
+            </tr>
+            {{/each}}
+         </tbody>
+      </table>
+   </div>
+</div>

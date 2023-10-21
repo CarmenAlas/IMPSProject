@@ -8,11 +8,11 @@ module.exports = {
             const result = await pool.query ('SELECT * FROM profesores');
             return result;
         } catch (error) {
-            console.error('Ocurrio un problema al obtener los estudiantes',error);
+            console.error('Ocurrio un problema al obtener los estudiantes');
         }
     },
 
-    //Insertar un estudiante
+    //Insertar un profesor
 
     insertarProfesor: async(nuevoProfesor) => {
         try {
@@ -20,7 +20,7 @@ module.exports = {
             return result.insertId;
 
         } catch (error) {
-            console.error('Ocurrio un error al insertar los datos ')
+            console.error('Ocurrio un error al insertar los datos ',error)
         }
     },
     //Actualizar profesor
@@ -54,7 +54,7 @@ module.exports = {
             const result = await pool.query('DELETE FROM profesores WHERE idprofesor = ?', [idprofesor]);
             return result.affectedRows > 0;
         } catch (error) {
-            console.error('Erro al eliminar el registro', error);
+            console.error('Error al eliminar el registro', error);
         }
     }
 }

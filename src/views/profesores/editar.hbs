@@ -15,16 +15,16 @@
                     <input type="text" class="form-control" name="apellido" placeholder="Apellido del profesor" value="{{profesor.apellido}}" />
                 </div>
                 <div class="form-group">
-                    <input type="date" class="form-control" name="fecha_nacimiento" placeholder="Fecha de nacimiento" value="{{profesor.fecha_nacimiento}}" />
+                    <input type="date" class="form-control" name="fecha_nacimiento" placeholder="Fecha de nacimiento" value="{{formatDate profesor.fecha_nacimiento}}" />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="profesion" placeholder="Profesión del profesor" value="{{profesor.profesion}}" />
+                    <input type="text" class="form-control" name="profesion" placeholder="Profesión " value="{{profesor.profesion}}" />
                 </div>
                 <div class="form-group">
-                   <input type="text" class="form-control" name="genero" placeholder="genero del profesor" />
+                   <input type="text" class="form-control" name="genero" placeholder="Genero " value="{{profesor.genero}}" />
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Correo del profesor" value="{{profesor.email}}" />
+                    <input type="email" class="form-control" name="email" placeholder="Correo " value="{{profesor.email}}" />
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success btn-block">Guardar cambios</button>
