@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const queries = require('../repositories/CarreraRepository');
-const carrerasQuery = require('../repositories/CarreraRepository');
+
 
 // Endpoint para mostrar todas las carreras 
 router.get('/', async (request, response) => {
-  console.log('Entro aqui');
+  
     const carreras = await queries.obtenerTodasLasCarreras();
-    console.log('Salio aqui');
-
+    
      response.render('carreras/listado', {carreras:carreras}); // Mostramos el listado de carreras
 });
 
@@ -29,7 +28,6 @@ router.post('/agregar', async(request, response) => {
 
   response.redirect('/carreras');
 });
-
 
 // Endpoint para mostrar el formulario de edición
 router.get('/editar/:idcarrera', async (request, response) => {
@@ -54,13 +52,14 @@ router.post('/editar/:id', async (request, response) => {
   const resultado = await queries.actualizarCarrera(id, datosModificados);
 
   if(resultado){
-    console.log('Estudiante modificado con exito');
-    response.redirect('/carreras');
-  }else{
-    console.log('Error al modificar estudiante');
-    response.redirect('/carreras/editar/'+ idcarrera);
+    request.flash('success', 'Registro actualizado con exito');
+  } else {
+     request.flash('error', 'Ocurrio un problema al actualizar el registro');
   }
+  response.redirect('/carreras');
 });
+
+
 
 // Endpoint que permite eliminar un estudiante
 router.get('/eliminar/:idcarrera', async(request, response) => {
@@ -68,7 +67,9 @@ router.get('/eliminar/:idcarrera', async(request, response) => {
   const { idcarrera } = request.params;
   const resultado = await queries.eliminarCarrera(idcarrera);
   if(resultado > 0){
-      console.log('Eliminado con éxito');
+    request.flash('success', 'Eliminacion correcta');
+  } else {
+      request.flash('error', 'Error al eliminar');
   }
   response.redirect('/carreras');
 });
