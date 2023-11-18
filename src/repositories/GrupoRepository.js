@@ -52,8 +52,8 @@ actualizarGrupo: async(idgrupo, datosModificados) => {
   }catch(error){
     console.error('Error al eliminar grupo', error);
   }
-}
-}
+},
+
 
 // Asignar grupo
 asignarGrupo: async(asignacion) => {
@@ -66,5 +66,5 @@ asignarGrupo: async(asignacion) => {
   console.log('Ocurrio un problema al asignar el grupo', error);
    }
   }
-
+}
  

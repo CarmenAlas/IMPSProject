@@ -20,8 +20,24 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="profesion" placeholder="Profesión " value="{{profesor.profesion}}" />
                 </div>
-                <div class="form-group">
-                   <input type="text" class="form-control" name="genero" placeholder="Genero " value="{{profesor.genero}}" />
+               <div class="form-group">
+                    <label for="generos">Genero:</label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero" id="M" value="M"
+                                 {{#eq "M" profesor.genero}}checked{{/eq}}>
+                                <label class="form-check-label" for="M">Masculino</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero" id="F" value="F"
+                                 {{#eq "F" profesor.genero}}checked{{/eq}}>
+                                <label class="form-check-label" for="M">Femenino</label>
+                             </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" name="email" placeholder="Correo " value="{{profesor.email}}" />

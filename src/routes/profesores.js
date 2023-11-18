@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const queries = require('../repositories/ProfesorRepository');
+const { isLoggedIn } = require('../lib/auth');
 
 // Endpoint para mostrar todos los profesores
-router.get('/', async (request, response) => {
+router.get('/',  isLoggedIn, async (request, response) => {
   console.log('Entro aqui');
     const profesores = await queries.obtenerTodosLosProfesores();
 
@@ -11,18 +12,22 @@ router.get('/', async (request, response) => {
 });
 
 // Endpoint para agregar un profesor
-router.post('/agregar', async(request, response) => {
+router.post('/agregar', isLoggedIn,  async(request, response) => {
     
   const {idprofesor, nombre,apellido,fecha_nacimiento, profesion, genero, email } = request.body;
   const nuevoProfesor = { idprofesor, nombre, apellido, fecha_nacimiento,profesion,genero,email };
 
   const resultado = await queries.insertarProfesor(nuevoProfesor);
-
+  if (resultado) {
+    request.flash('success', 'Registro agregado con exito');
+} else {
+    request.flash('error', 'Ocurrio un problema al agregar el registro');
+}
   response.redirect('/profesores');
 });
 
 // Endpoint que permite mostrar el formulario para agregar un nuevo profesor
-router.get('/agregar', async(request, response) => {
+router.get('/agregar', isLoggedIn,  async(request, response) => {
 
     // Renderizamos el formulario
     response.render('profesores/agregar');
@@ -32,25 +37,26 @@ router.get('/agregar', async(request, response) => {
 
 
 // Endpoint que permite editar un profesor
-router.post('/editar/:id', async (request, response) => {
+router.post('/editar/:id', isLoggedIn,  async (request, response) => {
   const { id } = request.params;
   const {idprofesor,nombre,apellido,fecha_nacimiento,profesion,genero,email} = request.body;
   const datosModificados = {idprofesor,nombre,apellido,fecha_nacimiento,profesion,genero,email};
 
   const resultado = await queries.actualizarProfesor(id, datosModificados);
 
-  if(resultado){
-    console.log('Profesor modificado con exito');
-    response.redirect('/profesores');
-  }else{
-    console.log('Error al modificar ');
-    response.redirect('/profesores/editar/'+ idprofesor);
+  if (resultado) {
+    request.flash('success', 'Registro actualizado con exito');
+} else {
+    request.flash('error', 'Ocurrio un problema al actualizar el registro');
+
   }
+  response.redirect('/profesores/editar/'+ idprofesor);
+
 });
 
 
 // Endpoint para mostrar el formulario de edición
-router.get('/editar/:idprofesor', async (request, response) => {
+router.get('/editar/:idprofesor',  isLoggedIn, async (request, response) => {
     
     
         const {idprofesor } = request.params;
@@ -68,13 +74,15 @@ router.get('/editar/:idprofesor', async (request, response) => {
 
 
 // Endpoint que permite eliminar un profesor
-router.get('/eliminar/:idprofesor', async(request, response) => {
+router.get('/eliminar/:idprofesor',  isLoggedIn, async(request, response) => {
   // Desestructuramos el objeto que nos mandan en la peticion y extraemos el idprofesor
   const { idprofesor } = request.params;
   const resultado = await queries.eliminarProfesor(idprofesor);
-  if(resultado > 0){
-      console.log('Eliminado con éxito');
-  }
+  if (resultado>0) {
+    request.flash('success', 'Registro eliminado con exito');
+} else {
+    request.flash('error', 'Ocurrio un problema al eliminar el registro');
+}
   response.redirect('/profesores');
 });
 
